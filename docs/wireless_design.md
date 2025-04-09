@@ -48,7 +48,7 @@ The WiFi access point created by the ESP32 requires simple but effective securit
 
 This approach prioritizes usability while maintaining reasonable security, recognizing that the device is physically accessible to users and operates within close physical proximity to both the controller and target devices.
 
-![Wireless Connection Diagram](diagrams/wireless-connections.png)
+![Wireless Connection Diagram](../diagrams/wireless-connections.png)
 
 ## Power Management
 
