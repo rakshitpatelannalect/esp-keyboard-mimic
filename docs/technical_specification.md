@@ -40,13 +40,13 @@ The ESP32 bridges these two connections, maintaining both simultaneously.
 ## 2. Hardware Requirements
 
 ### 2.1 ESP32 Device
-- ESP32 microcontroller with Bluetooth capabilities (e.g., ESP32-S2, ESP32-S3)
+- ESP32 microcontroller with Bluetooth capabilities (e.g., ESP32-WROOM-32, ESP32-C3)
 - Flash memory: Minimum 4MB
 - External button input for hardware interrupt
 - Status LEDs (power, connection, typing activity)
 - Power supply options:
-  - USB power
-  - Optional battery with charging circuit
+  - Battery with charging circuit
+  - External DC power input
 
 ### 2.2 Hardware Button Interface
 - Tactile momentary switch with debounce circuit

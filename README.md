@@ -1,6 +1,6 @@
 # ESP Keyboard Mimic
 
-A hardware-software solution for automatic keyboard input using ESP32 microcontroller.
+A hardware-software solution for wireless automatic keyboard input using ESP32 microcontroller.
 
 ## Problem Statement
 
@@ -12,6 +12,7 @@ Many secure systems prevent copy-pasting of sensitive information like passwords
 - Floating window application for text capture with one-click typing
 - Quick access buttons for frequently used text snippets
 - Most recently/frequently used content tracking
+- Completely wireless operation with no USB dependency
 - WiFi & Bluetooth connectivity for device communication
 - Physical stop button for immediate interruption
 - Secure text transmission from application to ESP device
@@ -20,9 +21,10 @@ Many secure systems prevent copy-pasting of sensitive information like passwords
 ## Components
 
 ### Hardware
-- ESP32 development board
+- ESP32 development board (WROOM-32 or C3 variant)
+- Fully wireless connection to target device
+- Battery power option for true wireless mobility
 - Optional custom PCB with physical controls
-- Wireless connection to target device
 - Future expansion: Physical control panel with up to 50 programmable buttons
 
 ### Software

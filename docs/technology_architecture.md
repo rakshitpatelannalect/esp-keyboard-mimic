@@ -16,24 +16,18 @@
   - Support for keyboard, mouse, and composite devices
   - Bluetooth Classic and BLE support
 
-#### 1.1.3 USB HID Implementation
-- **TinyUSB Library**
-  - Integrated with ESP-IDF
-  - Provides USB HID device emulation
-  - Support for keyboard, mouse, and composite devices
-
-#### 1.1.4 Bluetooth Stack
+#### 1.1.3 Bluetooth Stack
 - **ESP32 Bluedroid Stack**
   - BLE 4.2+ support
   - GATT services and characteristics for data transfer
   - Secure connection features
 
-#### 1.1.5 Programming Language
+#### 1.1.4 Programming Language
 - **C/C++**
   - For firmware development
   - Optimized for embedded systems resources
 
-#### 1.1.6 Build System
+#### 1.1.5 Build System
 - **CMake with ESP-IDF Build System**
   - Project configuration
   - Dependency management
@@ -202,7 +196,6 @@
 - **VSCode** with ESP-IDF extension
 - **PlatformIO** (alternative IDE integration)
 - **Logic Analyzer** for hardware debugging
-- **USB Protocol Analyzer** for HID testing
 
 ### 3.2 Desktop Application Development
 - **VSCode** with JavaScript/TypeScript extensions
@@ -223,17 +216,17 @@
 ## 4. Hardware Technology Selection
 
 ### 4.1 Recommended ESP32 Variants
-- **ESP32-S3** (primary recommendation)
-  - Native USB support
-  - Bluetooth 5 capability
+- **ESP32-WROOM-32** (primary recommendation)
+  - Bluetooth and BLE capability
   - Dual-core processor for parallel tasks
+  - Excellent wireless performance
 - **ESP32-C3** (alternative for size-constrained designs)
   - Smaller form factor
   - Lower power consumption
   - Single-core RISC-V processor
 
 ### 4.2 Physical Control Panel Components
-- **ATmega32U4** for button controller
+- **ESP32-based controller** for button interface
 - **WS2812B RGB LEDs** for button indicators
 - **OLED Display** for status information
 - **ESP32-C3** for wireless connectivity
@@ -252,7 +245,6 @@
   - Full access to ESP32 capabilities
   - Better performance and control
   - Native BLE stack implementation
-  - TinyUSB library integration
 
 ### 5.3 Bluetooth vs. Other Communication Options
 - **Bluetooth LE** selected for:
