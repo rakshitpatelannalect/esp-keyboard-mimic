@@ -51,6 +51,9 @@
 - Implement text capture mechanisms
 - Develop device discovery and pairing functionality
 - Add configuration panels for device settings
+- Implement quick access buttons for frequent content
+- Create hotkey configuration interface
+- Add most-recently-used (MRU) and most-frequently-used (MFU) tracking
 
 ### 3.3 Communication with ESP32
 - Establish Bluetooth connection
@@ -102,3 +105,11 @@
 - Add support for additional HID devices
 - Optimize typing parameters for better performance
 - Implement secure firmware update mechanism
+
+### 6.4 Physical Control Panel Development
+- Design PCB for physical button array (up to 50 buttons)
+- Implement firmware for button controller
+- Create communication protocol between panel and desktop app
+- Develop user interface for button programming
+- Implement TOP button functionality for most frequent content
+- Add visual indicators (LEDs) for button status
