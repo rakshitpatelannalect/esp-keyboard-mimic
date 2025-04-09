@@ -26,6 +26,28 @@ The system operates with two separate wireless connections:
    - Text content transferred over this secure connection
    - Configuration changes sent via this channel
 
+### WiFi Security & Password Management
+
+The WiFi access point created by the ESP32 requires simple but effective security:
+
+1. **Default Password Approach**
+   - Single standard default password across all devices
+   - Easy to remember and document in user manual
+   - Balances security with ease of use
+   - Avoids complexity of per-device unique passwords
+
+2. **Password Change Option**
+   - Users can change default password through desktop application
+   - New password stored in ESP32's non-volatile memory
+   - Factory reset option to revert to default password
+
+3. **Connection Security**
+   - WPA2 encryption for WiFi connection
+   - Limited to single client connection
+   - Automatic timeout for inactive sessions
+
+This approach prioritizes usability while maintaining reasonable security, recognizing that the device is physically accessible to users and operates within close physical proximity to both the controller and target devices.
+
 ![Wireless Connection Diagram](diagrams/wireless-connections.png)
 
 ## Power Management
