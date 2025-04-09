@@ -128,3 +128,20 @@
 - Re-authentication required after timeout period
 - Protection against deauthentication attacks
 - Signal strength monitoring for proximity verification
+
+## 8. Proximity-Based Security Features
+
+### 8.1 Signal Strength Monitoring
+- RSSI threshold configuration for trusted operational range
+- Automatic disconnection when signal drops below security threshold
+- Prevention of long-range interception attacks
+
+### 8.2 Operational Security Modes
+- High security mode: Requires controller device to remain in close proximity
+- Standard mode: Normal operational range
+- Temporary expanded range: Time-limited permission for extended distance operation
+
+### 8.3 Physical Presence Verification
+- Optional button press confirmation for sensitive operations
+- Periodic verification requirements for continued operation
+- Automatic lockdown on suspected unauthorized access attempts

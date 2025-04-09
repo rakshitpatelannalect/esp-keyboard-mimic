@@ -54,9 +54,9 @@ The ESP32 bridges these two connections, maintaining both simultaneously.
 - Optional: Custom PCB with multiple control buttons
 
 ### 2.3 Hardware Form Factor Options
-- USB dongle form factor
+- Compact wireless dongle form factor
 - Custom enclosure with external button
-- PCB integrated with mechanical keyboard
+- PCB integrated with mechanical keyboard or control panel
 
 ## 3. Software Components
 
@@ -186,5 +186,5 @@ The ESP32 bridges these two connections, maintaining both simultaneously.
 
 - Typing speed: Variable from 30-500 characters per minute
 - Latency: <100ms from command to typing initiation
-- Connection range: 10m minimum for Bluetooth
-- Battery life (if battery-powered): >8 hours standby, >2 hours active typing
+- Connection range: 10m minimum for Bluetooth, 50m for WiFi
+- Battery life (if battery-powered): >6 hours standby, >1.5 hours active typing
