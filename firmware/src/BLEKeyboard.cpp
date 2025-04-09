@@ -58,7 +58,8 @@ private:
 };
 
 // Constructor
-BLEKeyboard::BLEKeyboard() : pServer(nullptr), pHIDDevice(nullptr), pInputCharacteristic(nullptr), connected(false) {
+BLEKeyboard::BLEKeyboard() : pServer(nullptr), pHIDDevice(nullptr), pInputCharacteristic(nullptr), 
+                            connected(false), currentLayout(LAYOUT_US) {
   resetKeyBuffer();
 }
 
@@ -132,13 +133,25 @@ bool BLEKeyboard::isConnected() {
 void BLEKeyboard::write(char c) {
   if (!connected) return;
   
-  // Convert ASCII to HID code
-  uint8_t hidCode = keyToHIDCode(c);
+  // Get key mapping based on current layout
+  KeyMapping mapping = getKeyMapping(c);
+  
+  // Apply shift if needed
+  if (mapping.needShift) {
+    keyBuffer[0] |= 0x02;  // Left shift modifier
+  } else {
+    keyBuffer[0] &= ~0x02; // Clear shift modifier
+  }
   
   // Press and release key
-  press(hidCode);
+  press(mapping.hidCode);
   delay(5);
-  release(hidCode);
+  release(mapping.hidCode);
+}
+
+// Get current keyboard layout
+KeyboardLayout BLEKeyboard::getLayout() const {
+  return currentLayout;
 }
 
 // Write a string
@@ -217,8 +230,29 @@ void BLEKeyboard::sendReport(uint8_t* keyBuffer) {
   }
 }
 
-// Convert ASCII to HID code
-uint8_t BLEKeyboard::keyToHIDCode(char c) {
-  if (c < 0 || c > 127) return 0;
-  return asciiToHID[c];
+// Get key mapping based on current layout
+KeyMapping BLEKeyboard::getKeyMapping(char c) {
+  if (c < 0 || c > 127) {
+    KeyMapping emptyMapping = {0, false};
+    return emptyMapping;
+  }
+
+  switch (currentLayout) {
+    case LAYOUT_US:
+      return US_LAYOUT[c];
+    case LAYOUT_GERMAN:
+      return GERMAN_LAYOUT[c];
+    case LAYOUT_FRENCH:
+      return FRENCH_LAYOUT[c];
+    default:
+      // Default to US layout
+      return US_LAYOUT[c];
+  }
+}
+
+// Set the keyboard layout
+void BLEKeyboard::setLayout(KeyboardLayout layout) {
+  currentLayout = layout;
+  Serial.print("Keyboard layout set to: ");
+  Serial.println(layout);
 }

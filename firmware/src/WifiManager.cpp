@@ -32,7 +32,13 @@ void WifiManager::setupAccessPoint() {
   
   // Configure access point with unique SSID and password
   WiFi.mode(WIFI_AP);
-  WiFi.softAP(apSSID.c_str(), apPassword.c_str(), 1, false, 1); // Channel 1, not hidden, max 1 connection
+  bool success = WiFi.softAP(apSSID.c_str(), apPassword.c_str(), 1, false, 1); // Channel 1, not hidden, max 1 connection
+  
+  if (!success) {
+    Serial.println("Failed to create WiFi access point. Retrying...");
+    delay(1000);
+    WiFi.softAP(apSSID.c_str(), apPassword.c_str(), 1, false, 1);
+  }
   
   IPAddress IP = WiFi.softAPIP();
   Serial.print("AP IP address: ");
@@ -41,6 +47,17 @@ void WifiManager::setupAccessPoint() {
   // Setup web server routes
   server.on("/", HTTP_GET, [this](AsyncWebServerRequest *request) {
     this->handleRoot(request);
+  });
+  
+  // Add status endpoint for connectivity testing
+  server.on("/status", HTTP_GET, [this](AsyncWebServerRequest *request) {
+    JsonDocument doc;
+    doc["status"] = "online";
+    doc["deviceName"] = apSSID;
+    doc["clientConnected"] = clientConnected;
+    String response;
+    serializeJson(doc, response);
+    request->send(200, "application/json", response);
   });
   
   // Handle commands via POST requests

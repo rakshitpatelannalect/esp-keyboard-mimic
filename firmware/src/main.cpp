@@ -127,9 +127,14 @@ void processIncomingCommand(String command) {
   String action = doc["action"].as<String>();
   
   if (action == "type") {
+    if (!bleKeyboard.isConnected()) {
+      Serial.println("Error: Cannot type, Bluetooth not connected");
+      return;
+    }
+    
     current_text = doc["text"].as<String>();
     typing_active = true;
-    Serial.println("Received type command with text: " + current_text);
+    Serial.println("Received type command with text length: " + String(current_text.length()));
   } 
   else if (action == "stop") {
     typing_active = false;
@@ -141,5 +146,12 @@ void processIncomingCommand(String command) {
     JsonObject settings = doc["settings"].as<JsonObject>();
     webConfig.updateSettings(settings);
     Serial.println("Settings updated");
+  }
+  else if (action == "status") {
+    // Just a status check, no action needed
+    Serial.println("Status check received");
+  }
+  else {
+    Serial.println("Unknown action: " + action);
   }
 }
