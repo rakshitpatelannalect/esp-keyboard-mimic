@@ -134,7 +134,7 @@
   - Client MAC address whitelisting for additional security
 
 - **Password Management**
-  - Default hardcoded password out of factory (unique per device if possible)
+  - Standard default password across all devices for ease of use
   - Option to change password via desktop application
   - Password stored in encrypted non-volatile storage on ESP32
   - Password change requires current connected session for verification
