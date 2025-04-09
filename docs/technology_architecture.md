@@ -104,31 +104,87 @@
 
 ## 2. Technology Integration Points
 
-### 2.1 Desktop App to ESP32 Communication
+### 2.1 Dual-Device Connection Architecture
 
-#### 2.1.1 Protocol Stack
+#### 2.1.1 Connection Topology Challenge
+- **Key Challenge**: ESP32 must simultaneously:
+  1. Act as a USB HID keyboard to the target device (where text will be typed)
+  2. Communicate with the controller device (running our desktop application)
+
+#### 2.1.2 Solution Architecture
+- **USB Connection**: Primary connection to target device
+  - ESP32 connected via USB cable to target device
+  - Acts as standard HID keyboard device
+  - No special software required on target device
+
+- **WiFi/Bluetooth Connection**: Secondary connection to controller device
+  - ESP32 creates WiFi access point or Bluetooth connection
+  - Desktop controller application connects to this network
+  - Text content transferred over this separate connection
+  - Completely independent from the USB HID connection
+
+![Dual-Device Connection Architecture](/diagrams/dual-connection-architecture.png)
+
+#### 2.1.3 WiFi Access Point Security Implementation
+
+- **Limited Connection WiFi Hotspot**
+  - ESP32 creates a secure WiFi access point with maximum 1 client capacity
+  - Prevents multiple connections that could lead to unauthorized access
+  - Client MAC address whitelisting for additional security
+
+- **Password Management**
+  - Default hardcoded password out of factory (unique per device if possible)
+  - Option to change password via desktop application
+  - Password stored in encrypted non-volatile storage on ESP32
+  - Password change requires current connected session for verification
+
+- **Factory Reset Mechanism**
+  - Hardware-based password reset option
+    - Physical button combination (press and hold during boot)
+    - Timing-based press pattern for security
+  - Resets WiFi password to factory default
+  - Visual indicator (LED pattern) to confirm reset
+  - Optional: Reset counter in EEPROM to prevent brute force attacks
+
+- **Connection Security**
+  - WPA2/WPA3 encryption for WiFi connection
+  - Unique session token generated on each connection
+  - Connection timeout after period of inactivity
+  - HTTPS for web configuration interface
+
+#### 2.1.4 Alternative Connection Options
+
+| Connection Method | Pros | Cons | Recommendation |
+|------------------|------|------|----------------|
+| WiFi + USB | Longer range, higher bandwidth | Higher power consumption | Best for stationary setups |
+| Bluetooth + USB | Lower power, simpler setup | Limited range, potential interference | Best for portable use |
+| ESP-NOW + USB | Very low power, simple protocol | Limited features, shorter range | For battery-critical applications |
+
+### 2.2 Communication Protocol Design
+
+#### 2.2.1 Protocol Stack
 - **Bluetooth LE**
   - GATT service for keyboard control
   - Characteristic for text transmission
   - Notification characteristic for status updates
 
-#### 2.1.2 Data Format
+#### 2.2.2 Data Format
 - **JSON** for configuration data
 - **Binary Protocol** for text transmission (efficiency)
 - **Protocol Buffers** (optional for complex structured data)
 
-#### 2.1.3 Security Implementation
+#### 2.2.3 Security Implementation
 - **AES-256-CCM** encryption
 - Challenge-response authentication
 - Secure key exchange
 
-### 2.2 Configuration Synchronization
+### 2.3 Configuration Synchronization
 
-#### 2.2.1 Local Synchronization
+#### 2.3.1 Local Synchronization
 - **Bluetooth LE** for direct sync
 - **QR Code** for quick configuration transfer
 
-#### 2.2.2 Future Cloud Sync
+#### 2.3.2 Future Cloud Sync
 - **End-to-end encrypted** synchronization
 - **REST API** with JWT authentication
 - **WebSocket** for real-time updates

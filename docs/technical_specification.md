@@ -4,35 +4,32 @@
 
 ### 1.1 Overview
 The ESP Keyboard Mimic system consists of two main components working together:
-- ESP32 microcontroller (acting as HID keyboard emulator)
+- ESP32 microcontroller (acting as wireless HID keyboard emulator)
 - Desktop application (floating window interface with configuration capabilities)
 
 The desktop application will handle both the text input interface and device configuration, with potential for future cloud synchronization similar to applications like Notion or Evernote.
 
 ### 1.2 Data Flow
-1. User enters or captures text through the desktop application
-2. Text is encrypted and transmitted to the ESP32 device via Bluetooth
-3. ESP32 decrypts the content and emulates keyboard input on the target device
+1. User enters or captures text through the desktop application on the controller device
+2. Text is encrypted and transmitted to the ESP32 device via WiFi
+3. ESP32 decrypts the content and emulates wireless keyboard input on the target device via Bluetooth HID
 4. Status information flows back to the desktop application for user feedback
 5. Optional: Desktop application may sync configurations and text snippets to cloud storage in future versions
 
-### 1.3 Component Communication
-```
-┌─────────────────────────────┐                  ┌───────────────────┐
-│  Desktop Application        │◄────Bluetooth───►│  ESP32 Device     │
-│  - Text Input Interface     │                  └───────┬───────────┘
-│  - Device Configuration     │                         │
-│  - Settings Management      │                         │ USB HID
-│  - (Future) Cloud Sync      │                         ▼
-└─────────────────────────────┘                  Target Device
-         ▲
-         │
-         ▼
-┌─────────────────────────────┐
-│  (Future) Cloud Storage     │
-│  for Sync Between Devices   │
-└─────────────────────────────┘
-```
+### 1.3 Dual-Device Connection Architecture
+The system operates with a dual-device connection topology:
+
+1. **Controller Device**: Runs the desktop application, provides text content
+   - Connects to ESP32 via WiFi hotspot
+   - Sends text and commands to ESP32
+   - Receives status updates from ESP32
+
+2. **Target Device**: Receives the typed text
+   - ESP32 connects via Bluetooth HID
+   - Recognizes ESP32 as standard Bluetooth keyboard
+   - No special software required on target device
+   
+The ESP32 bridges these two connections, maintaining both simultaneously.
 
 ### 1.4 Quick Access Features
 - Floating desktop controller with one-click typing initiation
@@ -43,8 +40,7 @@ The desktop application will handle both the text input interface and device con
 ## 2. Hardware Requirements
 
 ### 2.1 ESP32 Device
-- ESP32 microcontroller with USB capabilities (e.g., ESP32-S2, ESP32-S3)
-- Bluetooth capabilities for communication
+- ESP32 microcontroller with Bluetooth capabilities (e.g., ESP32-S2, ESP32-S3)
 - Flash memory: Minimum 4MB
 - External button input for hardware interrupt
 - Status LEDs (power, connection, typing activity)
@@ -67,8 +63,7 @@ The desktop application will handle both the text input interface and device con
 ### 3.1 ESP32 Firmware
 
 #### 3.1.1 Core Features
-- USB HID keyboard implementation
-- Bluetooth communication stack
+- Bluetooth HID keyboard implementation
 - Secure text storage and encryption
 - Configurable typing parameters
 - Hardware button interrupt handling
@@ -183,7 +178,7 @@ The desktop application will handle both the text input interface and device con
 - One-touch typing of preset content
 - TOP buttons for most frequently used content
 - LED indicators for active buttons
-- USB or Bluetooth connectivity to desktop application
+- Bluetooth connectivity to desktop application
 - Customizable button layouts and functions
 - Status display showing active snippet name
 

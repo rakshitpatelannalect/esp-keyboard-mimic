@@ -96,3 +96,35 @@
 - Buffer overflow attempt
 - Physical access threat simulation
 - Encryption key extraction attempt
+
+## 7. WiFi Hotspot Security
+
+### 7.1 Access Point Configuration
+- Single-client WiFi access point configuration
+- MAC address filtering for authorized controller devices
+- Hidden SSID option for reduced visibility
+- Automatic channel selection to avoid interference
+- Low power transmission to limit physical range
+
+### 7.2 Authentication Mechanism
+- WPA2/WPA3 encryption for WiFi connection
+- Default factory password unique to each device
+- User-configurable password via secure interface
+- Minimum password strength requirements enforced
+- Password stored in encrypted format in ESP32 flash
+
+### 7.3 Password Recovery
+- Hardware-based factory reset mechanism
+  - Physical button press sequence during boot
+  - Specific timing pattern required for security
+  - Visual confirmation via status LED
+- Reset limitations to prevent brute force attempts
+  - Progressive delay between reset attempts
+  - Reset counter stored in protected memory
+  - Optional complete device lockdown after multiple attempts
+
+### 7.4 Connection Management
+- Automatic disconnection of inactive sessions
+- Re-authentication required after timeout period
+- Protection against deauthentication attacks
+- Signal strength monitoring for proximity verification

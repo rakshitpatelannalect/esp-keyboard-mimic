@@ -12,39 +12,46 @@
 
 #### 1.1.2 Toolchain Installation
 - Install ESP-IDF and set up the environment variables
-- Verify installation with `idf.py --version`
-- Install necessary Python dependencies using `idf.py requirements`
+- Verify installation with appropriate version checking commands
+- Install necessary Python dependencies using the requirements installer
 
 #### 1.1.3 Development Board Configuration
-- Enable USB CDC and HID in menuconfig
-- Select appropriate USB pins for your development board
+- Enable Bluetooth HID in menuconfig
+- Select appropriate wireless pins for your development board
 - Configure flash size and partition layout
 - Enable Bluetooth for device communication
 
 ## 2. Firmware Development
 
-### 2.1 USB HID Keyboard Implementation
-- Use TinyUSB library for USB HID functionality
-- Implement keyboard report descriptor
-- Handle USB events and send keyboard reports
+### 2.1 Bluetooth HID Keyboard Implementation
+- Use ESP32 Bluetooth library for HID functionality
+- Implement appropriate keyboard report descriptor
+- Handle Bluetooth events and send keyboard reports
 
-### 2.2 Bluetooth Communication
-- Enable Bluetooth stack in ESP-IDF
-- Implement secure pairing mechanism
-- Use AES-256 encryption for text transmission
-- Handle incoming text data and decrypt for typing
+### 2.2 WiFi Communication
+- Enable WiFi stack in ESP-IDF
+- Implement secure access point configuration with single-client restriction
+- Use appropriate security protocols (WPA2/WPA3)
+- Configure the ESP32 to maintain both WiFi and Bluetooth connections simultaneously
 
 ### 2.3 Hardware Button Interrupt
 - Configure GPIO pin for hardware button
 - Implement debounce logic
 - Trigger typing activity on button press
 
+### 2.4 WiFi Hotspot Implementation
+- Configure ESP32 as WiFi access point with client limitation
+- Implement secure password management system with encryption
+- Design a factory reset mechanism with appropriate security measures
+- Ensure secure connection handling in both ESP32 firmware and desktop application
+- Implement session management with timeouts and automatic disconnection
+
 ## 3. Desktop Application Development
 
 ### 3.1 Development Environment
 - Use Electron.js for cross-platform desktop application
 - Set up Node.js and npm for development
-- Install necessary dependencies (e.g., Bluetooth libraries)
+- Install necessary dependencies (e.g., WiFi and Bluetooth libraries)
 
 ### 3.2 Core Features Implementation
 - Create floating window interface
@@ -56,7 +63,7 @@
 - Add most-recently-used (MRU) and most-frequently-used (MFU) tracking
 
 ### 3.3 Communication with ESP32
-- Establish Bluetooth connection
+- Establish WiFi connection to ESP32 access point
 - Encrypt text data before transmission
 - Handle status updates from ESP32 device
 
@@ -64,8 +71,8 @@
 
 ### 4.1 ESP32 Firmware Testing
 - Use serial monitor for debugging
-- Test USB HID functionality with target device
-- Verify Bluetooth communication and encryption
+- Test Bluetooth HID functionality with target device
+- Verify WiFi communication and encryption
 
 ### 4.2 Desktop Application Testing
 - Test text capture methods
@@ -80,8 +87,8 @@
 ## 5. Deployment
 
 ### 5.1 ESP32 Firmware Deployment
-- Build firmware using `idf.py build`
-- Flash firmware to ESP32 using `idf.py flash`
+- Build firmware using appropriate build commands
+- Flash firmware to ESP32 using standard flashing tools
 - Verify functionality after flashing
 
 ### 5.2 Desktop Application Deployment
