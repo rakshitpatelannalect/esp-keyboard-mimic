@@ -8,25 +8,25 @@ Many secure systems prevent copy-pasting of sensitive information like passwords
 
 ## Features
 
-- ESP32-based USB HID keyboard emulation
+- ESP32-based Bluetooth HID keyboard emulation
 - Floating window application for text capture with one-click typing
 - Quick access buttons for frequently used text snippets
 - Most recently/frequently used content tracking
-- Bluetooth connectivity for device communication
+- WiFi & Bluetooth connectivity for device communication
 - Physical stop button for immediate interruption
 - Secure text transmission from application to ESP device
-- Exclusive Bluetooth device pairing for enhanced security
+- Exclusive device pairing for enhanced security
 
 ## Components
 
 ### Hardware
 - ESP32 development board
 - Optional custom PCB with physical controls
-- USB connection to target device
+- Wireless connection to target device
 - Future expansion: Physical control panel with up to 50 programmable buttons
 
 ### Software
-- ESP32 firmware with USB HID implementation
+- ESP32 firmware with Bluetooth HID implementation
 - Cross-platform desktop application with floating interface
 - Quick access hotkeys for frequent text snippets
 - Web configuration portal

@@ -29,8 +29,8 @@
 - **bleno** - BLE peripheral simulation for protocol testing
 - Custom BLE service simulators for desktop-to-desktop testing
 
-#### 1.2.2 USB HID Simulation
-- **node-hid** with virtual device drivers
+#### 1.2.2 Bluetooth HID Simulation
+- Virtual Bluetooth HID device simulation
 - Log-based HID output visualization
 - OS-native virtual HID devices where supported
 
@@ -119,6 +119,12 @@
   - Security scans
 - Matrix testing for multiple platforms
 - Automated release tagging
+
+### 3.1 ESP32 Development
+- **VSCode** with ESP-IDF extension
+- **PlatformIO** (alternative IDE integration)
+- **Logic Analyzer** for hardware debugging
+- **Bluetooth Protocol Analyzer** for HID testing
 
 ### 3.2 Test Automation
 - Nightly full test suite runs

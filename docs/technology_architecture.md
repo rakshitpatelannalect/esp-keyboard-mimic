@@ -9,24 +9,31 @@
   - Version: 4.4 or newer
   - Rationale: Native support for ESP32 features, comprehensive API access, and direct hardware control
 
-#### 1.1.2 USB HID Implementation
+#### 1.1.2 Bluetooth HID Implementation
+- **ESP32 Bluetooth Stack**
+  - Integrated with ESP-IDF
+  - Provides Bluetooth HID device emulation
+  - Support for keyboard, mouse, and composite devices
+  - Bluetooth Classic and BLE support
+
+#### 1.1.3 USB HID Implementation
 - **TinyUSB Library**
   - Integrated with ESP-IDF
   - Provides USB HID device emulation
   - Support for keyboard, mouse, and composite devices
 
-#### 1.1.3 Bluetooth Stack
+#### 1.1.4 Bluetooth Stack
 - **ESP32 Bluedroid Stack**
   - BLE 4.2+ support
   - GATT services and characteristics for data transfer
   - Secure connection features
 
-#### 1.1.4 Programming Language
+#### 1.1.5 Programming Language
 - **C/C++**
   - For firmware development
   - Optimized for embedded systems resources
 
-#### 1.1.5 Build System
+#### 1.1.6 Build System
 - **CMake with ESP-IDF Build System**
   - Project configuration
   - Dependency management
@@ -108,20 +115,20 @@
 
 #### 2.1.1 Connection Topology Challenge
 - **Key Challenge**: ESP32 must simultaneously:
-  1. Act as a USB HID keyboard to the target device (where text will be typed)
+  1. Act as a Bluetooth HID keyboard to the target device (where text will be typed)
   2. Communicate with the controller device (running our desktop application)
 
 #### 2.1.2 Solution Architecture
-- **USB Connection**: Primary connection to target device
-  - ESP32 connected via USB cable to target device
+- **Bluetooth HID Connection**: Primary connection to target device
+  - ESP32 connects to target device via Bluetooth
   - Acts as standard HID keyboard device
   - No special software required on target device
 
-- **WiFi/Bluetooth Connection**: Secondary connection to controller device
-  - ESP32 creates WiFi access point or Bluetooth connection
+- **WiFi Connection**: Secondary connection to controller device
+  - ESP32 creates WiFi access point
   - Desktop controller application connects to this network
   - Text content transferred over this separate connection
-  - Completely independent from the USB HID connection
+  - Completely independent from the Bluetooth HID connection
 
 ![Dual-Device Connection Architecture](/diagrams/dual-connection-architecture.png)
 
@@ -156,9 +163,9 @@
 
 | Connection Method | Pros | Cons | Recommendation |
 |------------------|------|------|----------------|
-| WiFi + USB | Longer range, higher bandwidth | Higher power consumption | Best for stationary setups |
-| Bluetooth + USB | Lower power, simpler setup | Limited range, potential interference | Best for portable use |
-| ESP-NOW + USB | Very low power, simple protocol | Limited features, shorter range | For battery-critical applications |
+| WiFi + Bluetooth | Longer range for controller, universal HID support | Higher power consumption | Best for stationary setups |
+| WiFi + BLE | Lower power, modern devices | Limited compatibility with older devices | Best for most use cases |
+| ESP-NOW + Bluetooth | Very low power, simple protocol | Limited controller features, shorter range | For battery-critical applications |
 
 ### 2.2 Communication Protocol Design
 

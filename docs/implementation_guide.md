@@ -5,10 +5,10 @@
 ### 1.1 ESP32 Development
 
 #### 1.1.1 Prerequisites
-- ESP-IDF v4.4+ (for best TinyUSB support)
+- ESP-IDF v4.4+ (for best Bluetooth support)
 - Python 3.6+ for ESP-IDF tools
 - CMake 3.5+ and Ninja build system
-- USB serial driver for your ESP32 development board
+- Serial driver for your ESP32 development board
 
 #### 1.1.2 Toolchain Installation
 - Install ESP-IDF and set up the environment variables
@@ -19,7 +19,7 @@
 - Enable Bluetooth HID in menuconfig
 - Select appropriate wireless pins for your development board
 - Configure flash size and partition layout
-- Enable Bluetooth for device communication
+- Enable dual-mode operation (WiFi + Bluetooth)
 
 ## 2. Firmware Development
 
@@ -27,6 +27,7 @@
 - Use ESP32 Bluetooth library for HID functionality
 - Implement appropriate keyboard report descriptor
 - Handle Bluetooth events and send keyboard reports
+- Support for various keyboard layouts and special keys
 
 ### 2.2 WiFi Communication
 - Enable WiFi stack in ESP-IDF

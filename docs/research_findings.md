@@ -4,25 +4,26 @@
 
 ### 1.1 Hardware Options Analysis
 
-| ESP32 Variant | USB HID Support | Bluetooth | Power Consumption | Recommendation |
-|---------------|-----------------|-----------|-------------------|----------------|
-| ESP32         | Via external IC | Yes      | Medium            | Not recommended due to external IC requirement |
-| ESP32-S2      | Native          | No       | Low               | Good option for wired-only implementation |
-| ESP32-S3      | Native          | Yes      | Low-Medium        | Best option for full feature set |
-| ESP32-C3      | Native          | Yes      | Very Low          | Good for battery operation, limited GPIO |
+| ESP32 Variant | Bluetooth HID Support | WiFi | Power Consumption | Recommendation |
+|---------------|----------------------|------|-------------------|----------------|
+| ESP32         | Yes                  | Yes  | Medium            | Good option for dual connectivity |
+| ESP32-S2      | No                   | Yes  | Low               | Not recommended due to lack of Bluetooth |
+| ESP32-S3      | Yes                  | Yes  | Low-Medium        | Best option for full feature set |
+| ESP32-C3      | Yes                  | Yes  | Very Low          | Good for battery operation, limited GPIO |
 
-### 1.2 USB HID Implementation Libraries
+### 1.2 Bluetooth HID Implementation Libraries
 
-#### 1.2.1 TinyUSB
-- Comprehensive USB stack with HID support
+#### 1.2.1 ESP32 BT/BLE Stack
+- Comprehensive Bluetooth stack with HID support
 - Native integration with ESP-IDF
-- Support for composite devices (keyboard + mouse)
+- Support for multiple profiles including HID
 - Good community support and documentation
 
-#### 1.2.2 ESP32 USB Host Shield Library
-- Alternative implementation
-- Less mature than TinyUSB
-- May require more low-level management
+#### 1.2.2 NimBLE
+- Alternative lightweight Bluetooth stack
+- Lower memory footprint
+- Potentially better power efficiency
+- May require more low-level configuration
 
 ### 1.3 HID Protocol Findings
 - Standard HID keyboard reports use 8 bytes
