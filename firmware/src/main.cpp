@@ -10,16 +10,19 @@
 #include "WifiManager.h"
 #include "WebConfig.h"
 #include "FactoryReset.h"
+#include "BatteryMonitor.h"
 
 // Constants
 #define DEVICE_NAME "ESP-Keyboard-Mimic"
 #define STOP_BUTTON_PIN 0 // GPIO0 - typically the BOOT button on most ESP32 dev boards
+#define BATTERY_PIN 34   // GPIO34 - ADC1_6 channel for battery monitoring
 
 // Global objects
 BLEKeyboard bleKeyboard;
 WifiManager wifiManager;
 WebConfig webConfig;
 FactoryReset factoryReset(STOP_BUTTON_PIN);
+BatteryMonitor batteryMonitor(BATTERY_PIN);
 
 // Variables
 volatile bool typing_active = false;
@@ -91,6 +94,10 @@ void setupHardware() {
   // Set up stop button with interrupt
   pinMode(STOP_BUTTON_PIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(STOP_BUTTON_PIN), stopButtonISR, FALLING);
+  
+  // Initialize battery monitoring
+  batteryMonitor.begin();
+  batteryMonitor.setLowBatteryThreshold(15); // 15% as low battery warning
   
   Serial.println("Hardware setup complete");
 }

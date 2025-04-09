@@ -55,6 +55,13 @@ void WifiManager::setupAccessPoint() {
     doc["status"] = "online";
     doc["deviceName"] = apSSID;
     doc["clientConnected"] = clientConnected;
+    
+    // Add battery status if available (using external batteryMonitor)
+    extern BatteryMonitor batteryMonitor;
+    doc["batteryPercentage"] = batteryMonitor.getBatteryPercentage();
+    doc["batteryVoltage"] = batteryMonitor.getBatteryVoltage();
+    doc["lowBattery"] = batteryMonitor.isLowBattery();
+    
     String response;
     serializeJson(doc, response);
     request->send(200, "application/json", response);
