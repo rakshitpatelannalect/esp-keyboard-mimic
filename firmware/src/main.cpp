@@ -9,6 +9,7 @@
 #include "BLEKeyboard.h"
 #include "WifiManager.h"
 #include "WebConfig.h"
+#include "FactoryReset.h"
 
 // Constants
 #define DEVICE_NAME "ESP-Keyboard-Mimic"
@@ -18,6 +19,7 @@
 BLEKeyboard bleKeyboard;
 WifiManager wifiManager;
 WebConfig webConfig;
+FactoryReset factoryReset(STOP_BUTTON_PIN);
 
 // Variables
 volatile bool typing_active = false;
@@ -47,6 +49,9 @@ void setup() {
   // Setup WiFi access point
   setupWifi();
   
+  // Initialize factory reset mechanism
+  factoryReset.begin();
+  
   Serial.println("ESP Keyboard Mimic - Ready!");
 }
 
@@ -57,6 +62,9 @@ void loop() {
     stop_requested = false;
     Serial.println("Typing stopped by hardware button");
   }
+  
+  // Check for factory reset
+  factoryReset.check();
   
   // If typing is active and we have text to type
   if (typing_active && current_text.length() > 0) {
